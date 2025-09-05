@@ -36,5 +36,17 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(CORPlot)
 ## basic example code
+PerformLogReg(data=df_MR_CLEAN,
+              formula = mRS~group,
+              GroupName = "group",
+              upper = TRUE)
+
+# PerformLogReg(data=df_MR_CLEAN,
+#               formula = mRS ~ group+sex,
+#               GroupName = "group")
+# 
+# PerformLogReg(data=df_MR_CLEAN,
+#               formula = mRS ~ group+sex,
+#               GroupName = "sex")
 ```
 
