@@ -1,9 +1,9 @@
 Package: CORPlot
-Title: What the Package Does (One Line, Title Case)
+Title: Create Cumulative Odds Ratio Plot
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Yongxi", "Long", , "y.long@lumc.nl", role = c("aut", "cre"))
+Description: Create cumulative odds ratio plot to visually inspect the proportional odds assumption from the proportional odds model.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

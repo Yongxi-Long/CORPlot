@@ -31,22 +31,34 @@ pak::pak("Yongxi-Long/CORPlot")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+There are three steps to make a cumulative odds ratio plot, each corresponds to a function in this package:
+
+-   *PerformLogReg*: Perform cumulative logistic regression (i.e., no proportionality constraint) and get all binary odds ratios
+-   *PerformPO*: Perform the proportional odds model and get the common odds ratio
+-   *CORPlot*: Create the cumulative odds ratio plot
+
+Users can directly input to the CORPlot() funtion and this function will do the first two steps internally. Or users can choose to supplied a data frame of odds ratios calculated externally and ask CORPlot to make the plot. 
 
 ```{r example}
 library(CORPlot)
-## basic example code
-PerformLogReg(data=df_MR_CLEAN,
-              formula = mRS~group,
+library(knitr)
+
+# load the example data of the MR CLEAN trial
+data(df_MR_CLEAN)
+
+## use PerforLogReg function to get all binary odds ratios
+# We calculate the odds ratio for the group effect, adjusted by sex
+# This is done by putting both group and sex in the formula
+# and ask for group effect by letting GroupName = "group"
+# similarly, if we want the odds ratio of the sex effect, adjusted by group
+# we can let GroupName = "sex"
+
+binary_ORs_df <- PerformLogReg(data=df_MR_CLEAN,
+              formula = mRS~group+sex,
               GroupName = "group",
               upper = TRUE)
-
-# PerformLogReg(data=df_MR_CLEAN,
-#               formula = mRS ~ group+sex,
-#               GroupName = "group")
-# 
-# PerformLogReg(data=df_MR_CLEAN,
-#               formula = mRS ~ group+sex,
-#               GroupName = "sex")
+binary_ORs_df |>
+  kable(digits = 3, format = "markdown",
+        caption = "Binary odds ratios of the 7-point mRS outcome in the MR CLEAN trial") 
 ```
 
