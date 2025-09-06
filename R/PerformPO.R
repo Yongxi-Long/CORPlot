@@ -17,6 +17,7 @@
 #' or equal to each cut-point. If \code{TRUE}, odds ratios are
 #' based on the probability of being greater than or equal to
 #' each cut-point.
+#' @param confLevel Confidence level; default is 0.95
 #'
 #' @return A data frame with one row. Columns are:
 #' \describe{
@@ -52,7 +53,8 @@ PerformPO <- function(
     data,
     formula,
     GroupName = NULL,
-    upper = FALSE)
+    upper = FALSE,
+    confLevel = 0.95)
 {
   #################### Input checks #################
   # check formula
@@ -94,7 +96,7 @@ PerformPO <- function(
 
   # upper and lower CI for the common odds ratio
   CIs <- tryCatch(
-    stats::confint(mod_po),
+    stats::confint(mod_po,level = confLevel),
     error = function(e) {
       warning("Failed to compute confidence intervals: ", e$message)
       NULL
@@ -111,8 +113,8 @@ PerformPO <- function(
   out <- data.frame(
     Label    = "common OR",
     OR       = cOR,
-    lower95CI = cOR_CI[1],
-    upper95CI = cOR_CI[2],
+    lowerCI = cOR_CI[1],
+    upperCI = cOR_CI[2],
     stringsAsFactors = FALSE
   )
   rownames(out) <- NULL

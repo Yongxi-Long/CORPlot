@@ -17,6 +17,7 @@
 #' or equal to each cut-point. If \code{TRUE}, odds ratios are
 #' based on the probability of being greater than or equal to
 #' each cut-point.
+#' @param confLevel Confidence level; default is 0.95
 #'
 #' @return A data frame with one row per binary cut-point. Columns are:
 #' \describe{
@@ -52,7 +53,8 @@
 PerformLogReg <- function(data,
                           formula,
                           GroupName=NULL,
-                          upper=FALSE)
+                          upper=FALSE,
+                          confLevel = 0.95)
 {
   #################### Input checks #################
   # check formula
@@ -99,7 +101,7 @@ PerformLogReg <- function(data,
 
   # upper and lower CI for binary ORs
   CIs <- tryCatch(
-    stats::confint(mod_multinom),
+    stats::confint(mod_multinom,level=confLevel),
     error = function(e) {
       warning("Failed to compute confidence intervals: ", e$message)
       NULL
@@ -124,8 +126,8 @@ PerformLogReg <- function(data,
   ORs <- data.frame(
     Label    = cutpoint_labels,
     OR       = as.numeric(b_ORs),
-    lower95CI = as.numeric(b_ORs_CI[, 1]),
-    upper95CI = as.numeric(b_ORs_CI[, 2]),
+    lowerCI = as.numeric(b_ORs_CI[, 1]),
+    upperCI = as.numeric(b_ORs_CI[, 2]),
     stringsAsFactors = FALSE
   )
   rownames(ORs) <- NULL

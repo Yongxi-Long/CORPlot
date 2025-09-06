@@ -17,5 +17,7 @@ Depends:
     R (>= 3.5)
 LazyData: true
 Imports: 
+    ggplot2,
+    knitr,
     stats,
     VGAM

@@ -4,7 +4,7 @@
 \alias{PerformLogReg}
 \title{Perform Cumulative Logistic Regression and Extract Binary Odds Ratios}
 \usage{
-PerformLogReg(data, formula, GroupName = NULL, upper = FALSE)
+PerformLogReg(data, formula, GroupName = NULL, upper = FALSE, confLevel = 0.95)
 }
 \arguments{
 \item{data}{A data frame containing variables in the model}
@@ -23,6 +23,8 @@ correspond to the probability of the outcome being less than
 or equal to each cut-point. If \code{TRUE}, odds ratios are
 based on the probability of being greater than or equal to
 each cut-point.}
+
+\item{confLevel}{Confidence level; default is 0.95}
 }
 \value{
 A data frame with one row per binary cut-point. Columns are:

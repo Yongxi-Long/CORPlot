@@ -1,3 +1,5 @@
+README
+================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -25,25 +27,88 @@ pak::pak("Yongxi-Long/CORPlot")
 There are three steps to make a cumulative odds ratio plot, each
 corresponds to a function in this package:
 
-- *PerformLogReg*: Perform cumulative logistic regression (i.e., no
+- *PerformLogReg()*: Perform cumulative logistic regression (i.e., no
   proportionality constraint) and get all binary odds ratios
-- *PerformPO*: Perform the proportional odds model and get the common
+- *PerformPO()*: Perform the proportional odds model and get the common
   odds ratio
-- *CORPlot*: Create the cumulative odds ratio plot
+- *CORPlot()*: Create the cumulative odds ratio plot
 
 Users can directly input to the CORPlot() funtion and this function will
 do the first two steps internally. Or users can choose to supplied a
 data frame of odds ratios calculated externally and ask CORPlot to make
 the plot.
 
+### The dataset
+
+We will be using the *df_MR_CLEAN* example data set from the package. It
+is from a randomized controlled trial in patients with stroke
+\[@berkhemer2015randomized\]. There were a total of 500 patients, 233
+from the intervention group and 267 from the control group. Three
+variables are present in the provided data.frame:
+
+- mRS: Modified Rankin Scale. A 7-point ordinal scale used to measure
+  patient outcomes
+- group: Group assignment. 1 = Intervention, 0 = Control
+- sex: Simulated variable for sex. 1 = Women, 0 = Men
+
+Due to the small sample sizes of mRS category 0 in this trial, we will
+combine mRS 0 and 1 to be mRS 1 for better representation of the
+Cumulative Odds Ratio Plot.
+
 ``` r
-library(CORPlot)
-library(knitr)
-#> Warning: package 'knitr' was built under R version 4.3.3
+data("df_MR_CLEAN")
+df_MR_CLEAN <- df_MR_CLEAN |>
+  dplyr::mutate(mRS6 = dplyr::case_when(
+    mRS <= 1 ~ 1,
+    TRUE ~ mRS
+  ))
+```
 
-# load the example data of the MR CLEAN trial
-data(df_MR_CLEAN)
+### Use *CORPlot*() directly
 
+``` r
+res <- CORPlot(
+  data = df_MR_CLEAN,
+  formula = mRS6 ~ group,
+  GroupName = "group",
+  confLevel = 0.9
+)
+# show the plot
+plot(res)
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+``` r
+# print the detailed ORs and confidence intervals
+print(res,digits = 3)
+#> 
+#> 
+#> Table: Odds Ratios
+#> 
+#> |   Label   |  OR   | lowerCI | upperCI |   type   |
+#> |:---------:|:-----:|:-------:|:-------:|:--------:|
+#> | mRS6 <= 1 | 2.056 |  1.196  |  3.534  | Observed |
+#> | mRS6 <= 2 | 2.050 |  1.453  |  2.892  | Observed |
+#> | mRS6 <= 3 | 1.890 |  1.399  |  2.554  | Observed |
+#> | mRS6 <= 4 | 1.426 |  1.032  |  1.970  | Observed |
+#> | mRS6 <= 5 | 1.065 |  0.744  |  1.525  | Observed |
+#> | common OR | 1.657 |  1.274  |  2.155  | Observed |
+```
+
+### Step-by-step construction
+
+We can also calculate the binary odds ratios and the common odds ratio
+from elsewhere and supply a data.frame to *CORPlot()* to make the plot
+only. The input data.frame must have the following columns:
+
+- Label: label to distinguish the binary odds ratios for different
+  cutpoints and the common odds ratio
+- OR: odds ratios
+- lowerCI: lower bound for the confidence interval
+- upperCI: upper bound for the confidence interval
+
+``` r
 ## use PerforLogReg function to get all binary odds ratios
 # We calculate the odds ratio for the group effect, adjusted by sex
 # This is done by putting both group and sex in the formula
@@ -52,21 +117,41 @@ data(df_MR_CLEAN)
 # we can let GroupName = "sex"
 
 binary_ORs_df <- PerformLogReg(data=df_MR_CLEAN,
-              formula = mRS~group+sex,
+              formula = mRS6~group+sex,
               GroupName = "group",
-              upper = TRUE)
-binary_ORs_df |>
+              upper = FALSE)
+
+## use PerformPO to get the common odds ratio
+cOR_df <- PerformPO(data=df_MR_CLEAN,
+              formula = mRS6~group+sex,
+              GroupName = "group",
+              upper = FALSE)
+
+## Combine the data.frame
+OR_df <- rbind(binary_ORs_df,
+               cOR_df)
+OR_df |>
   kable(digits = 3, format = "markdown",
-        caption = "Binary odds ratios of the 7-point mRS outcome in the MR CLEAN trial") 
+        caption = "Binary odds ratios and common odds ratio of the 7-point mRS outcome in the MR CLEAN trial") 
 ```
 
-| Label     |    OR | lower95CI | upper95CI |
-|:----------|------:|----------:|----------:|
-| mRS \>= 1 | 0.132 |     0.015 |     1.145 |
-| mRS \>= 2 | 0.457 |     0.240 |     0.869 |
-| mRS \>= 3 | 0.485 |     0.322 |     0.731 |
-| mRS \>= 4 | 0.533 |     0.372 |     0.763 |
-| mRS \>= 5 | 0.702 |     0.477 |     1.033 |
-| mRS \>= 6 | 0.954 |     0.622 |     1.463 |
+| Label      |    OR | lowerCI | upperCI |
+|:-----------|------:|--------:|--------:|
+| mRS6 \<= 1 | 2.195 |   1.154 |   4.175 |
+| mRS6 \<= 2 | 2.063 |   1.369 |   3.110 |
+| mRS6 \<= 3 | 1.878 |   1.312 |   2.690 |
+| mRS6 \<= 4 | 1.425 |   0.968 |   2.096 |
+| mRS6 \<= 5 | 1.049 |   0.684 |   1.608 |
+| common OR  | 1.647 |   1.204 |   2.253 |
 
-Binary odds ratios of the 7-point mRS outcome in the MR CLEAN trial
+Binary odds ratios and common odds ratio of the 7-point mRS outcome in
+the MR CLEAN trial
+
+``` r
+
+## Feed this data.frame to the CORPlot function
+res2 <- CORPlot(OR_df = OR_df)
+plot(res2)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />

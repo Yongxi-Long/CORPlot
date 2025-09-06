@@ -10,8 +10,8 @@ test_that("PerformLogReg returns expected structure", {
   res <- PerformLogReg(dat, mRS ~ group, GroupName = "group")
 
   expect_s3_class(res, "data.frame")
-  expect_named(res, c("Label", "OR", "lower95CI", "upper95CI"))
-  expect_true(all(c("OR", "lower95CI", "upper95CI") %in% colnames(res)))
+  expect_named(res, c("Label", "OR", "lowerCI", "upperCI"))
+  expect_true(all(c("OR", "lowerCI", "upperCI") %in% colnames(res)))
   expect_true(all(is.character(res$Label)))
   expect_type(res$OR, "double")
 })
@@ -74,7 +74,7 @@ test_that("function handles failure to compute CIs gracefully", {
   res <- suppressWarnings(
     PerformLogReg(dat, mRS ~ group, GroupName = "group")
   )
-  expect_true(all(c("lower95CI", "upper95CI") %in% names(res)))
+  expect_true(all(c("lowerCI", "upperCI") %in% names(res)))
   # allow NAs if confint fails
   expect_true(all(is.finite(res$OR)))
 })
