@@ -74,14 +74,14 @@ CORPlot <- function(data = NULL,
                     OR_df=NULL)
 {
   # --- Input handling ---
-  if (!is.null(OR_df) && (!is.null(data) || !is.null(formula) || !is.null(GroupName))) {
-    stop("Please provide either `OR_df` or (`data` + `formula` + `GroupName`), but not both.")
+  if (!is.null(OR_df) && (!is.null(data) || !is.null(formula))) {
+    stop("Please provide either `OR_df` or (`data` + `formula`), but not both.")
   }
 
   if(is.null(OR_df))
   {
-    if (is.null(data) || is.null(formula) || is.null(GroupName)) {
-      stop("When `OR_df` is not supplied, you must provide `data`, `formula`, and `GroupName`.")
+    if (is.null(data) || is.null(formula)) {
+      stop("When `OR_df` is not supplied, you must provide `data` and `formula`.")
     }
     binary_ORs_df <- PerformLogReg(
       data = data,

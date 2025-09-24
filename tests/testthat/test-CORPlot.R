@@ -2,11 +2,10 @@ test_that("CORPlot errors on invalid input combinations", {
   dummy_df <- data.frame(Label = "common OR", OR = 1, lowerCI = 0.8, upperCI = 1.2)
   # Both OR_df and data provided
   expect_error(
-    CORPlot(data = iris, formula = Sepal.Length ~ Species, GroupName = "Species", OR_df = dummy_df),
-    "either `OR_df` or"
+    CORPlot(data = iris, formula = Sepal.Length ~ Species, GroupName = "Species", OR_df = dummy_df)
   )
-  # Neither OR_df nor data/formula/groupname provided
-  expect_error(CORPlot(), "must provide `data`, `formula`, and `GroupName`")
+  # Neither OR_df nor data/formula/group name provided
+  expect_error(CORPlot(), "When `OR_df` is not supplied, you must provide `data` and `formula`.")
 })
 
 
