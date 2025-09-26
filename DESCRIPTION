@@ -1,6 +1,6 @@
 Package: CORPlot
 Title: Cumulative Odds Ratio Plot
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: person("Yongxi", "Long", email= "y.long@lumc.nl", role = c("aut", "cre", "cph"))
 Description: Create cumulative odds ratio plot to visually inspect the proportional odds assumption from the proportional odds model.
 License: MIT + file LICENSE
