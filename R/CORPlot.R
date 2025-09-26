@@ -1,3 +1,4 @@
+utils::globalVariables(c("Label", "OR", "type", "lowerCI", "upperCI"))
 #' Create Cumulative Odds Ratio Plot
 #'
 #' This function produces a cumulative odds ratio (COR) plot for an ordinal outcome.

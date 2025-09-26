@@ -11,8 +11,8 @@ README
 The goal of CORPlot is to create cumulative odds ratio plot to visually
 inspect the proportional odds assumption from the proportional odds
 model. For more explanation on the role of the proportional odds
-assumption in ordinal outcome analysis, see our paper (Long, Wiegers,
-Jacobs, Steyerberg, & Van Zwet, 2025).
+assumption in ordinal outcome analysis, see our paper (Long et. al,
+2025).
 
 ## Installation
 
@@ -160,27 +160,14 @@ plot(res2)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-# Reference
-
-<div id="refs" class="references csl-bib-body hanging-indent"
-line-spacing="2">
-
-<div id="ref-berkhemer2015randomized" class="csl-entry">
+## Reference
 
 Berkhemer, O. A., Fransen, P. S., Beumer, D., Van Den Berg, L. A.,
 Lingsma, H. F., Yoo, A. J., et al.others. (2015). A randomized trial of
-intraarterial treatment for acute ischemic stroke. *New England Journal
-of Medicine*, *372*(1), 11–20.
-
-</div>
-
-<div id="ref-long2025" class="csl-entry">
+intraarterial treatment for acute ischemic stroke. New England Journal
+of Medicine, 372(1), 11–20.
 
 Long, Y., Wiegers, E. J. A., Jacobs, B. C., Steyerberg, E. W., & Van
 Zwet, E. W. (2025). Role of the Proportional Odds Assumption for the
-Analysis of Ordinal Outcomes in Neurologic Trials. *Neurology*,
-*105*(8), e214146.
-
-</div>
-
-</div>
+Analysis of Ordinal Outcomes in Neurologic Trials. Neurology, 105(8),
+e214146.
