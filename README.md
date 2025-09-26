@@ -36,27 +36,27 @@ corresponds to a function in this package:
   odds ratio
 - *CORPlot()*: Create the cumulative odds ratio plot
 
-Users can directly input to the CORPlot() funtion and this function will
-do the first two steps internally. Or users can choose to supplied a
-data frame of odds ratios calculated externally and ask CORPlot to make
-the plot.
+Users can either directly input to the CORPlot() funtion and this
+function will do the first two steps internally. Or users can choose to
+supplied a data frame of odds ratios calculated externally and ask
+CORPlot to make the plot.
 
 ### The dataset
 
-We will be using the *df_MR_CLEAN* example data set from the package. It
-is from a randomized controlled trial in patients with stroke (Berkhemer
-et al., 2015). There were a total of 500 patients, 233 from the
-intervention group and 267 from the control group. Three variables are
-present in the provided data.frame:
+We will use the *df_MR_CLEAN* example dataset included in the package.
+It is from a randomized controlled trial investigating endovascular
+therapy in patients with stroke (Berkhemer et al., 2015). The trial
+enrolled 500 patients, with 233 assigned to the intervention group and
+267 to the control group. The dataset contains three variables:
 
 - mRS: Modified Rankin Scale. A 7-point ordinal scale used to measure
   patient outcomes
 - group: Group assignment. 1 = Intervention, 0 = Control
 - sex: Simulated variable for sex. 1 = Women, 0 = Men
 
-Due to the small sample sizes of mRS category 0 in this trial, we will
-combine mRS 0 and 1 to be mRS 1 for better representation of the
-Cumulative Odds Ratio Plot.
+Because very few patients fell into mRS category 0, we combine
+categories 0 and 1 into a single category (labeled mRS = 1) to improve
+representation in the Cumulative Odds Ratio plot.
 
 ``` r
 data("df_MR_CLEAN")
@@ -107,6 +107,8 @@ only. The input data.frame must have the following columns:
 
 - Label: label to distinguish the binary odds ratios for different
   cutpoints and the common odds ratio
+  - There must be a label identifying the common odds ratio, can be one
+    of “common odds ratio”, “common OR”, “cOR” (case insensitive).
 - OR: odds ratios
 - lowerCI: lower bound for the confidence interval
 - upperCI: upper bound for the confidence interval

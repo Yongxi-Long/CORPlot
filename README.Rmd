@@ -86,6 +86,7 @@ print(res,digits = 3)
 We can also calculate the binary odds ratios and the common odds ratio from elsewhere and supply a data.frame to *CORPlot()* to make the plot only. The input data.frame must have the following columns:
 
 -   Label: label to distinguish the binary odds ratios for different cutpoints and the common odds ratio
+    -   There must be a label identifying the common odds ratio, can be one of "common odds ratio", "common OR", "cOR" (case insensitive).
 -   OR: odds ratios
 -   lowerCI: lower bound for the confidence interval
 -   upperCI: upper bound for the confidence interval
