@@ -74,7 +74,7 @@ formula = mRS ~ group,
 GroupName = "group",
 confLevel = 0.90
 )
-res$`Cumulative Odds Ratio Plot` # show the plot
+res[["Cumulative Odds Ratio Plot"]] # show the plot
 # Use external OR data.frame
 OR_df <- data.frame(
   Label   = c("score<=1", "score<=2", "common OR"),
@@ -83,5 +83,5 @@ OR_df <- data.frame(
   upperCI = c(1.6, 2.0, 1.7)
 )
 res2 <- CORPlot(OR_df = OR_df)
-res2$`Cumulative Odds Ratio Plot`
+res2[["Cumulative Odds Ratio Plot"]]
 }
