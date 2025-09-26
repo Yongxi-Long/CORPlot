@@ -179,7 +179,7 @@ of Medicine*, *372*(1), 11–20.
 Long, Y., Wiegers, E. J. A., Jacobs, B. C., Steyerberg, E. W., & Van
 Zwet, E. W. (2025). Role of the Proportional Odds Assumption for the
 Analysis of Ordinal Outcomes in Neurologic Trials. *Neurology*,
-*105*(8), e214146. <https://doi.org/10.1212/WNL.0000000000214146>
+*105*(8), e214146.
 
 </div>
 
