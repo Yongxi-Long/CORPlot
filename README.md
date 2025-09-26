@@ -11,9 +11,9 @@ README
 The goal of CORPlot is to create cumulative odds ratio plot to visually
 inspect the proportional odds assumption from the proportional odds
 model. For more explanation on the role of the proportional odds
-assumption in ordinal outcome analysis, see our \[paper\]
-(<https://www.neurology.org/doi/10.1212/WNL.0000000000214146>)(Long,
-Wiegers, Jacobs, Steyerberg, & Van Zwet, 2025).
+assumption in ordinal outcome analysis, see our
+[paper](https://www.neurology.org/doi/10.1212/WNL.0000000000214146)
+(Long, Wiegers, Jacobs, Steyerberg, & Van Zwet, 2025).
 
 ## Installation
 

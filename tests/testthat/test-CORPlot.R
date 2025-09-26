@@ -47,7 +47,7 @@ test_that("CORPlot works with internal model fitting", {
 
 test_that("CORPlot handles label variations for common OR", {
   OR_df <- data.frame(
-    Label   = c("<=1", "<=2", "cOR"),  # lowercase variant
+    Label   = c("<=1", "<=2", "cor"),  # lowercase variant
     OR      = c(1.2, 1.5, 1.3),
     lowerCI = c(0.9, 1.1, 1.0),
     upperCI = c(1.6, 2.0, 1.7)
@@ -55,4 +55,14 @@ test_that("CORPlot handles label variations for common OR", {
 
   res <- CORPlot(OR_df = OR_df)
   expect_true("common OR" %in% res$`Odds Ratios`$Label)
+})
+
+test_that("CORPlot errors when not label for `common odds ratio` is provided", {
+  OR_df <- data.frame(
+    Label   = c("<=1", "<=2", "OR"),  # lowercase variant
+    OR      = c(1.2, 1.5, 1.3),
+    lowerCI = c(0.9, 1.1, 1.0),
+    upperCI = c(1.6, 2.0, 1.7)
+  )
+  expect_error(CORPlot(OR_df=OR_df))
 })

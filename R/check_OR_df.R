@@ -25,15 +25,15 @@ check_OR_df <- function(df)
   }
 
   # check for "common OR" label (liberal matching)
-  valid_labels <- c("common or", "cor", "cor", "cor")  # lowercase reference set
+  valid_labels <- c("common odds ratio","common or", "cor")  # lowercase reference set
   # normalize labels
   lbl_lower <- tolower(df$Label)
-  if (!any(lbl_lower %in% c("common or", "cor", "cor", "cor", "cor", "cor"))) {
+  if (!any(lbl_lower %in% valid_labels)) {
     stop("Input data.frame must contain a row with Label = 'common OR' (accepted forms: 'common OR', 'common or', 'cOR', 'cor').")
   } else
   {
     # standardize the label
-    df$Label[lbl_lower %in% c("common or", "cor", "cor", "cor")] <- "common OR"
+    df$Label[lbl_lower %in% valid_labels] <- "common OR"
   }
 
   # numeric checks
