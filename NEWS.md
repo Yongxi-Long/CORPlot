@@ -1,3 +1,3 @@
-# CORPlot (development version)
+# CORPlot 1.0.0
 
 * Initial CRAN submission.
