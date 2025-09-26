@@ -10,7 +10,10 @@ README
 
 The goal of CORPlot is to create cumulative odds ratio plot to visually
 inspect the proportional odds assumption from the proportional odds
-model.
+model. For more explanation on the role of the proportional odds
+assumption in ordinal outcome analysis, see our
+[paper](https://www.neurology.org/doi/10.1212/WNL.0000000000214146)(Long,
+Wiegers, Jacobs, Steyerberg, & Van Zwet, 2025).
 
 ## Installation
 
@@ -41,10 +44,10 @@ the plot.
 ### The dataset
 
 We will be using the *df_MR_CLEAN* example data set from the package. It
-is from a randomized controlled trial in patients with stroke
-\[@berkhemer2015randomized\]. There were a total of 500 patients, 233
-from the intervention group and 267 from the control group. Three
-variables are present in the provided data.frame:
+is from a randomized controlled trial in patients with stroke (Berkhemer
+et al., 2015). There were a total of 500 patients, 233 from the
+intervention group and 267 from the control group. Three variables are
+present in the provided data.frame:
 
 - mRS: Modified Rankin Scale. A 7-point ordinal scale used to measure
   patient outcomes
@@ -155,3 +158,28 @@ plot(res2)
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+# Reference
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+line-spacing="2">
+
+<div id="ref-berkhemer2015randomized" class="csl-entry">
+
+Berkhemer, O. A., Fransen, P. S., Beumer, D., Van Den Berg, L. A.,
+Lingsma, H. F., Yoo, A. J., et al.others. (2015). A randomized trial of
+intraarterial treatment for acute ischemic stroke. *New England Journal
+of Medicine*, *372*(1), 11–20.
+
+</div>
+
+<div id="ref-long2025" class="csl-entry">
+
+Long, Y., Wiegers, E. J. A., Jacobs, B. C., Steyerberg, E. W., & Van
+Zwet, E. W. (2025). Role of the Proportional Odds Assumption for the
+Analysis of Ordinal Outcomes in Neurologic Trials. *Neurology*,
+*105*(8), e214146. <https://doi.org/10.1212/WNL.0000000000214146>
+
+</div>
+
+</div>

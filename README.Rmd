@@ -3,6 +3,7 @@ title: "README"
 output: github_document
 bibiliography: reference.bib
 csl: apa-6th-edition.csl
+bibliography: references.bib
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -21,9 +22,10 @@ library(knitr)
 # CORPlot
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-The goal of CORPlot is to create cumulative odds ratio plot to visually inspect the proportional odds assumption from the proportional odds model.
+The goal of CORPlot is to create cumulative odds ratio plot to visually inspect the proportional odds assumption from the proportional odds model. For more explanation on the role of the proportional odds assumption in ordinal outcome analysis, see our [paper](https://www.neurology.org/doi/10.1212/WNL.0000000000214146)[@long2025].
 
 ## Installation
 
@@ -42,7 +44,7 @@ There are three steps to make a cumulative odds ratio plot, each corresponds to 
 -   *PerformPO()*: Perform the proportional odds model and get the common odds ratio
 -   *CORPlot()*: Create the cumulative odds ratio plot
 
-Users can directly input to the CORPlot() funtion and this function will do the first two steps internally. Or users can choose to supplied a data frame of odds ratios calculated externally and ask CORPlot to make the plot. 
+Users can directly input to the CORPlot() funtion and this function will do the first two steps internally. Or users can choose to supplied a data frame of odds ratios calculated externally and ask CORPlot to make the plot.
 
 ### The dataset
 
@@ -62,7 +64,6 @@ df_MR_CLEAN <- df_MR_CLEAN |>
     TRUE ~ mRS
   ))
 ```
-
 
 ### Use *CORPlot*() directly
 
@@ -120,5 +121,4 @@ res2 <- CORPlot(OR_df = OR_df)
 plot(res2)
 ```
 
-
-
+# Reference
